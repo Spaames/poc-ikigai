@@ -1,0 +1,15 @@
+### App
+GET http://localhost:3000
+
+### Check service login
+GET http://localhost:3000/login
+
+### Post user
+POST http://localhost:3000/users
+Content-Type: application/json
+
+{
+"userId": "vvrvrvr",
+"username": "testuser",
+"password": "testpassword"
+}
