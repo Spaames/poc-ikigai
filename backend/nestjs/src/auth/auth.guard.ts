@@ -1,4 +1,4 @@
-
+// adapted from docs 
 import {
   CanActivate,
   ExecutionContext,

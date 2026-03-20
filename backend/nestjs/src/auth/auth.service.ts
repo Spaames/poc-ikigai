@@ -2,7 +2,7 @@ import { Injectable, NotFoundException, UnauthorizedException } from '@nestjs/co
 import { JwtService } from '@nestjs/jwt';
 import { compare } from 'bcrypt';
 import { AuthBodyDto } from 'src/auth/authBodyDto';
-import { UsersService } from 'src/users/users.service';
+import { UsersService } from '../users/users.service';
 
 @Injectable()
 export class AuthService {
@@ -14,13 +14,17 @@ export class AuthService {
     async login(authBody: AuthBodyDto) {
         const { username, password } = authBody;
         const existingUser = await this.usersService.getUser(username);
-        if (!existingUser) throw new NotFoundException(`User with username ${username} not found`);
+        
+        if (!existingUser) {
+            throw new UnauthorizedException('Invalid credentials');
+        }
+        
         const isPasswordValid = await this.isPasswordValid(password, existingUser.password);
         if (!isPasswordValid) {
-            throw new UnauthorizedException('Invalid password');
+            throw new UnauthorizedException('Invalid credentials');
         }
-        return this.authenticateUser({ userId: existingUser.userId });
         
+        return this.authenticateUser({ userId: existingUser.userId });
     }
 
     async getProfile(userName: string) {
@@ -33,9 +37,8 @@ export class AuthService {
         return await compare(password, hashedPassword);
     }
 
-    private async authenticateUser({userId} : {userId: string}) {
+    private authenticateUser({userId} : {userId: string}) {
         const payload = { userId };
-        // eslint-disable-next-line @typescript-eslint/await-thenable
-        return { access_token : await this.jwtService.sign(payload) }
+        return { access_token : this.jwtService.sign(payload) }
     }
 }

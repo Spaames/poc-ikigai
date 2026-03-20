@@ -1,31 +1,29 @@
-### App
-GET http://localhost:3000
-
-### Check service login
-GET http://localhost:3000/login
-
-### Getuser
-GET http://localhost:3000/users/
-
-### Post user
-POST http://localhost:3000/users
-Content-Type: application/json
-
-{
-"userId": "434343",
-"username": "testuserhash",
-"password": "testpasswordhash"
-}
-
-### Auth login
+# AUTH ROUTES
+### Login
 POST http://localhost:3000/auth/login
 Content-Type: application/json
 
 {
-"username": "testuserhash",
-"password": "testpasswordhash"
+"username": "test2",
+"password": "test2"
 }
 
-### Auth get profile
-GET http://localhost:3000/auth/profile
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI0MzQzNDMiLCJpYXQiOjE3NzQwMTkyNjUsImV4cCI6MTc3NDAyMjg2NX0.8byqgVcSmf3u9bEHkSe7_t_4migx2GVb6y9PwZTKWNE
+### Récupération des infos de l'user (genre une page profil) || Auth guard need login
+GET http://localhost:3000/auth/profil
+Authorization: Bearer <token>
+
+
+
+# USERS ROUTES
+### Get all users without password (interceptors)
+GET http://localhost:3000/users/
+
+### Post User to register them in the database
+POST http://localhost:3000/users/register
+Content-Type: application/json
+
+{
+"userId": "4",
+"username": 1,
+"password": ""
+}
