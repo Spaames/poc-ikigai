@@ -5,7 +5,7 @@ export class User {
     @PrimaryColumn()
     userId: string;
 
-    @Column()
+    @Column() //possibilité de rajouter des params (unique etc)
     username: string;
 
     @Column()
