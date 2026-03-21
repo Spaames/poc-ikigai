@@ -4,8 +4,8 @@ POST http://localhost:3000/auth/login
 Content-Type: application/json
 
 {
-"username": "test2",
-"password": "test2"
+"username": "test6",
+"password": "test6"
 }
 
 ### Récupération des infos de l'user (genre une page profil) || Auth guard need login
@@ -23,7 +23,7 @@ POST http://localhost:3000/users/register
 Content-Type: application/json
 
 {
-"userId": "4",
-"username": 1,
-"password": ""
+"userId": "9",
+"username": "test6",
+"password": "test6"
 }
